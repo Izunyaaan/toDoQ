@@ -4,12 +4,27 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
   <title>TO DO QUEUE</title>
 </head>
 
 <body>
   <main>
     <h1>Meow Todo List</h1>
+    <div class="todo-card">
+      <!-- Checkbox naturally flips pink on selection -->
+      <input type="checkbox" id="task-1" class="todo-checkbox">
+
+      <!-- Text content zone automatically scales line lengths -->
+      <div class="todo-content">
+        <label for="task-1" class="todo-title">Refactor CSS architecture layout</label>
+        <span class="todo-meta">Category: Development</span>
+      </div>
+
+      <!-- Functional interactive button matching your theme variables -->
+      <button class="todo-btn-delete">Delete</button>
+    </div>
+
   </main>
 </body>
 

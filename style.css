@@ -1,0 +1,250 @@
+/* ==========================================================================
+   THE ULTIMATE KEVIN POWELL-INSPIRED MODERN CSS RESET
+   ========================================================================== */
+
+/* 1. Box sizing rule: standard, direct application (Avoids inheritance bugs) */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+/* 2. Reset margins only on specific layout-breaking blocks (Never nuke padding globally!) */
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+figure,
+blockquote,
+dl,
+dd {
+    margin: 0;
+}
+
+/* 3. Root layout stabilization & low-effort theme matching */
+html {
+    /* Forces browser UI/scrollbars to follow user dark/light system preference */
+    color-scheme: light dark;
+
+    /* Stops page layout shifting horizontally when content lengths require scrollbars */
+    scrollbar-gutter: stable;
+
+    /* Enables native height transitions to 'auto' without massive JS calculations */
+    interpolate-size: allow-keywords;
+}
+
+/* 4. Global structural Body configuration */
+body {
+    /* Core layout block metrics using dynamic logical viewport units */
+    min-block-size: 100svh;
+
+    /* Text layout and rendering smoothing */
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* 5. Typography balancing and structural readability thresholds */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    /* Distributes heading text evenly across lines (prevents single-word drops) */
+    text-wrap: balance;
+}
+
+p,
+li,
+figcaption {
+    /* Imposes the optimal, most readable character-count width boundary */
+    max-width: 65ch;
+
+    /* Prevents single trailing words (orphans) at the end of paragraphs */
+    text-wrap: pretty;
+}
+
+/* 6. Form element font fallback inheritance */
+input,
+button,
+textarea,
+select {
+    font: inherit;
+}
+
+/* 7. Fluid, container-responsive media elements */
+img,
+picture,
+svg,
+video,
+canvas {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+/* 8. Structural utility for navigational lists (Keeps screen readers happy) */
+ul[role='list'],
+ol[role='list'] {
+    list-style: none;
+    padding: 0;
+}
+
+/* 9. Anchor offset fix for sticky/fixed navigation bars */
+:target {
+    scroll-margin-top: 2rem;
+    /* Matches your sticky navbar height */
+}
+
+/* 10. Accessibility: Disables disruptive visual motion if requested by user OS */
+@media (prefers-reduced-motion: reduce) {
+    html:focus-within {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* ==========================================================================
+   TO-DO APPLICATION THEME: NEON AMBIENT (DEFAULT: DARK)
+   ========================================================================== */
+
+html {
+    /* Instructs the browser to prioritize Dark Mode rendering automatically */
+    color-scheme: dark light;
+}
+
+:root {
+    /* ------------------------------------------------------------------------
+     Semantic Color Tokens (Purple & Pink Edition)
+     Syntax Layout: light-dark( lightValue , darkValue )
+     ------------------------------------------------------------------------ */
+
+    /* Primary backgrounds */
+    --clr-bg: light-dark(#fdf8ff, #0a0512);
+    /* Soft Lavender Tint / Deep Cosmic Violet */
+    --clr-surface: light-dark(#ffffff, #160d26);
+    /* Pure White Card / Dark Obsidian Purple Card */
+
+    /* Typography contrast */
+    --clr-text: light-dark(#221138, #f5effc);
+    /* Deep Plum Text / Glowing Bright Lavender Text */
+    --clr-text-muted: light-dark(#7e699c, #a78bfa);
+    /* Soft Amethyst Muted Text / Vibrant Indigo Subtext */
+
+    /* Interactive Application Accents (The Purple & Pink Core) */
+    --clr-primary: light-dark(#d946ef, #f472b6);
+    /* Electric Fuchsia / Neon Cotton Candy Pink Button */
+    --clr-accent: light-dark(#7c3aed, #c084fc);
+    /* Regal Royal Purple / Soft Violet Accent Badge */
+    --clr-success: light-dark(#10b981, #34d399);
+    /* Mint Green Completed State stays clean and visible */
+    --clr-border: light-dark(#eedffa, #2e1c4e);
+    /* Pastel Lavender Border / High-Contrast Purple Line */
+
+    /* ------------------------------------------------------------------------
+     Functional Layout Design Scales
+     ------------------------------------------------------------------------ */
+    --radius-md: 16px;
+    /* Extra pillowy rounded card shapes */
+    --radius-round: 9999px;
+    --space-sm: 0.5rem;
+    --space-md: 1rem;
+    --space-lg: 1.5rem;
+
+    /* Ambient glow effect for the cards using the new color properties */
+    --shadow-sm: light-dark(0 4px 20px -2px rgba(124, 58, 237, 0.08),
+            0 4px 30px -2px rgba(244, 114, 182, 0.15));
+}
+
+/* 2. Bind the layout tokens structurally onto your core elements */
+body {
+    background-color: var(--clr-bg);
+    color: var(--clr-text);
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    padding: var(--space-lg);
+}
+
+/* ==========================================================================
+   THE TASK CARD COMPONENT
+   ========================================================================== */
+
+.todo-card {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+
+    background-color: var(--clr-surface);
+    border: 1px solid var(--clr-border);
+    border-radius: var(--radius-md);
+    padding: var(--space-md);
+    box-shadow: var(--shadow-sm);
+
+    /* Smooth transition wrapper if you decide to change states natively */
+    transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+/* Add a subtle hover interaction to make the interface feel responsive */
+.todo-card:hover {
+    border-color: var(--clr-primary);
+    transform: translateY(-2px);
+}
+
+/* 2. Checkbox configuration */
+.todo-checkbox {
+    /* Scales the input naturally without destroying accessibility bounds */
+    width: 1.25rem;
+    height: 1.25rem;
+    cursor: pointer;
+
+    /* Modern CSS native color mapping for form controls */
+    accent-color: var(--clr-primary);
+}
+
+/* 3. Text and meta container layout */
+.todo-content {
+    flex-grow: 1;
+    /* Instructs the text zone to fill all empty middle space */
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+.todo-title {
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+.todo-meta {
+    font-size: 0.85rem;
+    color: var(--clr-text-muted);
+}
+
+/* 4. Action Button styling */
+.todo-btn-delete {
+    background: transparent;
+    color: var(--clr-accent);
+    border: 1px solid var(--clr-border);
+    padding: var(--space-sm) var(--space-md);
+    border-radius: var(--radius-round);
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.todo-btn-delete:hover {
+    background-color: var(--clr-primary);
+    color: var(--clr-surface);
+    border-color: var(--clr-primary);
+}
